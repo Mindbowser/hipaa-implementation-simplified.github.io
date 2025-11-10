@@ -5,7 +5,12 @@
 
 class PresentationController {
   constructor() {
-    this.slides = Array.from(document.querySelectorAll('.slide'));
+    // Get only visible slides (not hidden with display: none)
+    this.allSlides = Array.from(document.querySelectorAll('.slide'));
+    this.slides = this.allSlides.filter(slide => {
+      // Check inline style attribute
+      return slide.style.display !== 'none';
+    });
     this.currentIndex = 0;
     this.totalSlides = this.slides.length;
     
@@ -18,6 +23,12 @@ class PresentationController {
   }
   
   init() {
+    // Remove active class from all slides and set it only on first visible slide
+    this.allSlides.forEach(slide => slide.classList.remove('active'));
+    if (this.slides.length > 0) {
+      this.slides[0].classList.add('active');
+    }
+    
     this.buildNavigation();
     this.attachEventListeners();
     this.updateUI();
