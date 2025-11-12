@@ -91,8 +91,24 @@ class DemoController {
   }
   
   getSuccessMessage(action, role) {
+    // Data minimization: Different roles see different levels of PHI
+    let viewRecordMessage = '';
+    
+    if (action === 'viewRecord') {
+      if (role === 'nurse') {
+        // Nurse sees limited data - only birth year, not full DOB (data minimization)
+        viewRecordMessage = `✅ <strong>Access Granted</strong><br>Viewing patient record...<br><br><div style="background: var(--brand-lighter); padding: 16px; border-radius: 8px; margin-top: 12px;"><strong>Patient: John Doe</strong><br>Birth Year: 1980 <span style="color: var(--brand-primary); font-size: 12px;">(Age: 45)</span><br>MRN: 123456<br>Diagnosis: Hypertension<br>Last Visit: 2025-11-01<br><br><em>Accessed by: ${role}</em><br><span style="font-size: 12px; color: var(--text-secondary);">💡 Data Minimization: Only birth year shown (not full DOB)</span></div>`;
+      } else if (role === 'doctor') {
+        // Doctor sees full information
+        viewRecordMessage = `✅ <strong>Access Granted</strong><br>Viewing patient record...<br><br><div style="background: var(--brand-lighter); padding: 16px; border-radius: 8px; margin-top: 12px;"><strong>Patient: John Doe</strong><br>DOB: 1980-05-15 <span style="color: var(--brand-primary); font-size: 12px;">(Age: 45)</span><br>MRN: 123456<br>Diagnosis: Hypertension<br>Medications: Lisinopril 10mg<br>Allergies: Penicillin<br>Last Visit: 2025-11-01<br><br><em>Accessed by: ${role}</em><br><span style="font-size: 12px; color: var(--text-secondary);">✓ Full access to all patient information</span></div>`;
+      } else {
+        // Patient sees their own full record
+        viewRecordMessage = `✅ <strong>Access Granted</strong><br>Viewing your record...<br><br><div style="background: var(--brand-lighter); padding: 16px; border-radius: 8px; margin-top: 12px;"><strong>Patient: John Doe</strong><br>DOB: 1980-05-15<br>MRN: 123456<br>Diagnosis: Hypertension<br>Last Visit: 2025-11-01<br><br><em>Accessed by: ${role}</em></div>`;
+      }
+    }
+    
     const messages = {
-      'viewRecord': `✅ <strong>Access Granted</strong><br>Viewing patient record...<br><br><div style="background: var(--brand-lighter); padding: 16px; border-radius: 8px; margin-top: 12px;"><strong>Patient: John Doe</strong><br>DOB: 1980-05-15<br>MRN: 123456<br>Diagnosis: Hypertension<br>Last Visit: 2025-11-01<br><br><em>Accessed by: ${role}</em></div>`,
+      'viewRecord': viewRecordMessage,
       'editRecord': `✅ <strong>Access Granted</strong><br>Opening record for editing...<br><br>You can now update patient vitals, add clinical notes, and modify treatment plans.<br><br><em>All changes will be logged in the audit trail.</em>`,
       'prescribe': `✅ <strong>Access Granted</strong><br>Opening prescription form...<br><br>You can now prescribe medications. The system will check for drug interactions and allergies before finalizing.<br><br><em>E-prescription will be sent to patient's pharmacy.</em>`,
       'viewAudit': `✅ <strong>Access Granted</strong><br>Loading audit logs...<br><br>Displaying all access logs, failed login attempts, and data modifications. Use filters to narrow down results.<br><br><em>Audit logs are immutable and stored for 7 years.</em>`,

@@ -442,7 +442,8 @@ html, body {
 }
 
 .slide-content {
-  max-width: 1000px;
+  max-width: 100%;
+  padding: 0 48px;
 }
 
 .content-block {
@@ -903,18 +904,77 @@ html, body {
 }
 
 .code-example pre {
-  background: var(--text-primary);
-  color: #f8f8f2;
+  background: #1e1e1e;
+  color: #d4d4d4;
   padding: 20px;
   border-radius: var(--radius-md);
   overflow-x: auto;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;
-  line-height: 1.5;
+  font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  box-shadow: var(--shadow-md);
+  border: 1px solid #333;
 }
 
 .code-example code {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+/* Enhanced code blocks for logging examples */
+pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+code {
+  font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+/* Syntax highlighting for better readability */
+pre code {
+  display: block;
+  color: #d4d4d4;
+}
+
+/* Output blocks with different styles */
+pre[style*="background: #ffe6e6"] {
+  background: #ffe6e6 !important;
+  color: #5a0a0f !important;
+  border-left: 4px solid var(--danger);
+  font-weight: 600;
+}
+
+pre[style*="background: #ffe6e6"] code {
+  color: #5a0a0f !important;
+}
+
+pre[style*="background: #e6f7e6"] {
+  background: #e6f7e6 !important;
+  color: #0d3d1a !important;
+  border-left: 4px solid var(--success);
+  font-weight: 600;
+}
+
+pre[style*="background: #e6f7e6"] code {
+  color: #0d3d1a !important;
+}
+
+pre[style*="background: var(--brand-lighter)"] {
+  background: var(--brand-lighter) !important;
+  color: #064854 !important;
+  border-left: 4px solid var(--brand-primary);
+  font-weight: 600;
+}
+
+pre[style*="background: var(--brand-lighter)"] code {
+  color: #064854 !important;
 }
 
 /* Live Audit Log */
