@@ -122,6 +122,15 @@ class PresentationController {
       navItems[this.currentIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
     
+    // Scroll to top of the slide content
+    const slidesContainer = document.querySelector('.slides');
+    if (slidesContainer) {
+      slidesContainer.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
     // Update UI
     this.updateUI();
     
