@@ -740,6 +740,66 @@ Medication: Metformin 500mg</textarea>
                 <p><strong>Example:</strong> A clinic used Google Analytics on their patient portal without a BAA. They were fined even though no breach happened, because sharing PHI with Google without a BAA violated HIPAA.</p>
               </div>
 
+              <div style="margin-top: 40px; padding: 24px; background: #fff3cd; border-radius: 12px; border-left: 4px solid #ffc107;">
+                <h3 style="color: #856404; margin-bottom: 16px; font-size: 20px; font-weight: 700;">🤖 AI Models & AI Integrations</h3>
+                <p style="color: #856404; margin-bottom: 16px; font-size: 16px;">
+                  <strong>Critical Note:</strong> AI services that process PHI require BAAs just like any other vendor.
+                </p>
+                
+                <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 16px;">
+                  <h4 style="color: var(--brand-primary); margin-bottom: 12px; font-size: 18px;">AI Services Requiring BAAs:</h4>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div>
+                      <strong style="color: var(--text-primary);">AI APIs:</strong>
+                      <ul style="margin-top: 8px; padding-left: 20px; color: var(--text-secondary);">
+                        <li>OpenAI API (GPT models)</li>
+                        <li>Anthropic (Claude API)</li>
+                        <li>Azure OpenAI Service</li>
+                        <li>AWS Bedrock</li>
+                        <li>Google Vertex AI</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <strong style="color: var(--text-primary);">Healthcare AI Tools:</strong>
+                      <ul style="margin-top: 8px; padding-left: 20px; color: var(--text-secondary);">
+                        <li>Medical imaging AI</li>
+                        <li>Clinical decision support</li>
+                        <li>AI chatbots for patients</li>
+                        <li>Predictive analytics platforms</li>
+                        <li>Natural language processing</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 16px;">
+                  <h4 style="color: var(--danger); margin-bottom: 12px; font-size: 18px;">⚠️ Common AI Compliance Mistakes:</h4>
+                  <ul style="padding-left: 20px; color: var(--text-primary);">
+                    <li style="margin-bottom: 8px;"><strong>Using consumer AI tools with PHI:</strong> ChatGPT web interface, free Claude - NO BAA available, don't use with PHI</li>
+                    <li style="margin-bottom: 8px;"><strong>Sending PHI to AI APIs without BAAs:</strong> Even if using API (not web), you need a signed BAA</li>
+                    <li style="margin-bottom: 8px;"><strong>Training models on PHI:</strong> If vendor trains their models on your data, they need BAA + must commit to not using PHI for training</li>
+                    <li style="margin-bottom: 8px;"><strong>Third-party AI integrations:</strong> Embedded AI widgets, chatbots, or tools on your site need BAAs</li>
+                  </ul>
+                </div>
+
+                <div style="background: var(--brand-lighter); padding: 16px; border-radius: 8px;">
+                  <h4 style="color: var(--brand-primary); margin-bottom: 12px; font-size: 18px;">✅ AI BAA Best Practices:</h4>
+                  <ul style="padding-left: 20px; color: var(--text-primary);">
+                    <li style="margin-bottom: 8px;"><strong>Use enterprise/API versions:</strong> Azure OpenAI, AWS Bedrock offer BAAs (consumer versions don't)</li>
+                    <li style="margin-bottom: 8px;"><strong>Verify no training on your data:</strong> Ensure vendor doesn't use your PHI to improve their models</li>
+                    <li style="margin-bottom: 8px;"><strong>Data retention policies:</strong> How long does AI vendor keep your data? Should be minimal or zero</li>
+                    <li style="margin-bottom: 8px;"><strong>De-identify before sending:</strong> Remove/mask PHI before sending to AI if BAA unavailable</li>
+                    <li style="margin-bottom: 8px;"><strong>Audit AI access:</strong> Log what data is sent to AI services, track all API calls</li>
+                  </ul>
+                </div>
+
+                <div style="margin-top: 16px; padding: 12px; background: #dc3545; color: white; border-radius: 6px;">
+                  <p style="margin: 0; font-size: 15px; font-weight: 600;">
+                    ❌ NEVER paste PHI into ChatGPT, Claude web interface, or any consumer AI tool without a BAA. Use only enterprise API versions with signed BAAs.
+                  </p>
+                </div>
+              </div>
+
               <div class="quiz-section" style="margin-top: 32px; display: none;">
                 <div id="baaQuiz"></div>
               </div>
@@ -902,6 +962,23 @@ jobs:
       # Secret detection
       - name: TruffleHog Scan
         uses: trufflesecurity/trufflehog@main</code></pre>
+              </div>
+
+              <div style="margin-top: 32px; text-align: center;">
+                <button onclick="openSecuritySample()" style="
+                  padding: 14px 32px;
+                  font-size: 16px;
+                  font-weight: 600;
+                  color: white;
+                  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+                  border: none;
+                  border-radius: 8px;
+                  cursor: pointer;
+                  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+                  transition: all 0.3s ease;
+                  ">
+                  📊 View Sample Security Report
+                </button>
               </div>
             </div>
           </section>
@@ -1594,6 +1671,102 @@ console.log(patientId); // 'pat_002'</code></pre>
       </div>
     </div>
   </div>
+
+  <!-- Full Screen Image Modal -->
+  <div id="securityImageModal" style="
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    cursor: pointer;
+    animation: fadeIn 0.3s ease;
+  ">
+    <div style="
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10001;
+      transition: color 0.3s ease;
+    " onclick="closeSecuritySample()" onmouseover="this.style.color='#ff4444'" onmouseout="this.style.color='white'">
+      &times;
+    </div>
+    <div style="
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 40px;
+    ">
+      <img src="security-example.png" alt="Security Sample Report" style="
+        max-width: 95%;
+        max-height: 95%;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      ">
+    </div>
+  </div>
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    #securityImageModal img {
+      transition: transform 0.3s ease;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4) !important;
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+  </style>
+
+  <script>
+    function openSecuritySample() {
+      const modal = document.getElementById('securityImageModal');
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSecuritySample() {
+      const modal = document.getElementById('securityImageModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside the image
+    document.addEventListener('DOMContentLoaded', function() {
+      const modal = document.getElementById('securityImageModal');
+      if (modal) {
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            closeSecuritySample();
+          }
+        });
+      }
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeSecuritySample();
+        }
+      });
+    });
+  </script>
 
   <script src="presentation.js"></script>
   <script src="demos.js"></script>
