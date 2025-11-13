@@ -67,8 +67,8 @@
                 </div>
 
                 <div class="checklist-card" style="padding: 32px;">
-                  <div class="checklist-number" style="font-size: 48px; margin-bottom: 16px;">👥</div>
-                  <h3 style="font-size: 24px; margin-bottom: 16px;">HR</h3>
+                  <div class="checklist-number" style="font-size: 48px; margin-bottom: 16px;">🔧 </div>
+                  <h3 style="font-size: 24px; margin-bottom: 16px;">IT Admin / HR</h3>
                   <p style="font-size: 16px; line-height: 1.6;">You manage workforce compliance. Conduct HIPAA training, enforce security policies, handle access provisioning/termination, and maintain training records.</p>
                 </div>
               </div>
@@ -887,85 +887,141 @@ const backupConfig = {
           <section class="slide" data-title="Security Assessments">
             <h1>Regular Security Assessments</h1>
             <div class="slide-content">
-              <div class="content-block">
-                <h2>Continuous Security Validation</h2>
-                <p>Regular assessments help identify vulnerabilities before attackers do.</p>
+              <div class="content-block" style="margin-bottom: 24px;">
+                <h2>What it means in practice</h2>
+                <p style="font-size: 18px; line-height: 1.6;">Regular security assessments are the continuous checks we do to ensure our systems do not expose PHI. This is not just a once-a-year audit — it's <strong>daily/weekly/monthly activities</strong> that developers, QA, and DevOps do.</p>
               </div>
 
-              <div class="two-column" style="margin: 32px 0;">
-                <div class="column">
-                  <h3>Types of Assessments</h3>
-                  <div class="role-list">
-                    <div class="role-item">
-                      <strong>Vulnerability Scanning</strong>
-                      <p>Automated scans for known vulnerabilities (monthly/quarterly)</p>
-                    </div>
-                    <div class="role-item">
-                      <strong>Penetration Testing</strong>
-                      <p>Simulated attacks by security professionals (annually)</p>
-                    </div>
-                    <div class="role-item">
-                      <strong>Risk Analysis</strong>
-                      <p>Comprehensive evaluation of all systems and processes (annually)</p>
-                    </div>
-                    <div class="role-item">
-                      <strong>Code Reviews</strong>
-                      <p>Security-focused code audits (before each release)</p>
-                    </div>
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 32px 0;">
+                <!-- Developers -->
+                <div style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #5B7FDB; transition: transform 0.2s ease;">
+                  <h3 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #5B7FDB;">👨‍💻 Developers</h3>
+                  
+                  <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #212529;">Static Code Analysis (SAST)</h4>
+                    <p style="margin: 0 0 8px 0; font-size: 14px; line-height: 1.5; color: #6c757d;">Run tools like SonarQube, Semgrep, OWASP Dependency Check, Snyk</p>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #212529;">
+                      <li>Hardcoded secrets</li>
+                      <li>SQL injection vulnerabilities</li>
+                      <li>Unsafe logging of PHI</li>
+                      <li>Insecure API endpoints</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="background: #fff3cd; padding: 16px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #856404; font-weight: 500;">
+                      <strong style="font-size: 16px;">Example:</strong> Dev pushes code → CI pipeline runs SAST → 🔴 "Warning: Patient DOB logged in plain text in logs." → Developer fixes it before merge.
+                    </p>
                   </div>
                 </div>
-                
-                <div class="column">
-                  <h3>Assessment Checklist</h3>
-                  <div class="checklist-column">
-                    <div class="checklist-item">Network security scan</div>
-                    <div class="checklist-item">Web application scan (OWASP Top 10)</div>
-                    <div class="checklist-item">Database security review</div>
-                    <div class="checklist-item">Access control audit</div>
-                    <div class="checklist-item">Encryption verification</div>
-                    <div class="checklist-item">Patch management review</div>
-                    <div class="checklist-item">Physical security assessment</div>
-                    <div class="checklist-item">Third-party vendor audit</div>
+
+                <!-- QA -->
+                <div style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #E85D75; transition: transform 0.2s ease;">
+                  <h3 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #E85D75;">🧪 QA</h3>
+                  
+                  <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #212529;">Security Test Cases</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #212529;">
+                      <li>No PHI in logs, screenshots, console, crash reports</li>
+                      <li>RBAC enforced (nurse can't see doctor dashboard)</li>
+                      <li>API responds with 401/403 properly</li>
+                      <li>Test broken access control & IDOR</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="background: #fff3cd; padding: 16px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #856404; font-weight: 500;">
+                      <strong style="font-size: 16px;">Example:</strong> QA tries /patient/123 → changes to /patient/124 → If they get data → report as HIPAA breach risk.
+                    </p>
                   </div>
                 </div>
-              </div>
 
-              <div class="code-example">
-                <h3>Sample CI/CD Security Integration</h3>
-                <pre><code>// GitHub Actions workflow for security scanning
-name: Security Scan
+                <!-- DevOps -->
+                <div style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #00A9E0; transition: transform 0.2s ease;">
+                  <h3 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #00A9E0;">⚙️ DevOps</h3>
+                  
+                  <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #212529;">Infra Vulnerability Scans</h4>
+                    <p style="margin: 0 0 8px 0; font-size: 14px; color: #6c757d;">AWS Inspector, Prisma Cloud, Nessus, Trivy</p>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #212529;">
+                      <li>S3 buckets storing PHI are not public</li>
+                      <li>Databases have encryption at rest</li>
+                      <li>Security groups are least-privileged</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="background: #fff3cd; padding: 16px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #856404; font-weight: 500;">
+                      <strong style="font-size: 16px;">Example:</strong> Trivy shows "PostgreSQL container vulnerable to CVE-XXXX" → DevOps schedules fix with developers.
+                    </p>
+                  </div>
+                </div>
 
-on: [push, pull_request]
+                <!-- IT Admin -->
+                <div style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #F5A623; transition: transform 0.2s ease;">
+                  <h3 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #F5A623;">🔧 IT Admin</h3>
+                  
+                  <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #212529;">Endpoint Security</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #212529;">
+                      <li>MDM on laptops</li>
+                      <li>Patch management</li>
+                      <li>Access revocation for leaving employees</li>
+                      <li>Secure Wi-Fi / VPN for PHI access</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="background: #fff3cd; padding: 16px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #856404; font-weight: 500;">
+                      <strong style="font-size: 16px;">Example:</strong> Developer has full local admin access → high risk → IT Admin ensures least privilege.
+                    </p>
+                  </div>
+                </div>
 
-jobs:
-  security:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      
-      # Dependency vulnerability scan
-      - name: Run npm audit
-        run: npm audit --audit-level=moderate
-      
-      # Static code analysis
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      
-      # Container image scan
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'image'
-          
-      # Secret detection
-      - name: TruffleHog Scan
-        uses: trufflesecurity/trufflehog@main</code></pre>
+                <!-- Designers -->
+                <div style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #50C878; transition: transform 0.2s ease;">
+                  <h3 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #50C878;">🎨 Designers</h3>
+                  
+                  <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #212529;">UX Security Decisions</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #212529;">
+                      <li>Don't display too much PHI on UI</li>
+                      <li>Avoid exposing PHI unnecessarily</li>
+                      <li>Sensitive screens auto-hide/timeout</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="background: #fff3cd; padding: 16px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #856404; font-weight: 500;">
+                      <strong style="font-size: 16px;">Example:</strong> Designer ensures "Lab results screen" hides results when user is idle for 60 seconds.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- PMs -->
+                <div style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #9B59B6; transition: transform 0.2s ease;">
+                  <h3 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #9B59B6;">📋 PMs</h3>
+                  
+                  <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #212529;">Security Prioritization</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #212529;">
+                      <li>Ensure security bugs get sprint priority</li>
+                      <li>Compliance stories are never skipped</li>
+                      <li>Track HIPAA checklist as deliverables</li>
+                      <li>Keep documentation updated for auditors</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="background: #fff3cd; padding: 16px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #856404; font-weight: 500;">
+                      <strong style="font-size: 16px;">Example:</strong> PM adds security acceptance criteria: "No PHI should be logged" on every story.
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div style="margin-top: 32px; text-align: center;">
-                <button onclick="openSecuritySample()" style="
+                <button onclick="openSecurityGallery()" style="
                   padding: 14px 32px;
                   font-size: 16px;
                   font-weight: 600;
@@ -977,7 +1033,7 @@ jobs:
                   box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
                   transition: all 0.3s ease;
                   ">
-                  📊 View Sample Security Report
+                  📊 View Sample Security Reports
                 </button>
               </div>
             </div>
@@ -987,78 +1043,163 @@ jobs:
           <section class="slide" data-title="Incident Response">
             <h1>Incident Response Plan</h1>
             <div class="slide-content">
-              <div class="content-block">
-                <h2>Preparing for the Inevitable</h2>
-                <p>Not if, but when. Having a documented incident response plan is crucial.</p>
+              <div class="content-block" style="margin-bottom: 24px;">
+                <h2>What it means</h2>
+                <p style="font-size: 18px; line-height: 1.6;">An Incident Response Plan (IRP) defines what we do when something goes wrong: a breach, vulnerability, outage, misconfigured bucket, leaked PHI, etc.</p>
               </div>
 
-              <div class="encryption-flow" style="margin: 32px 0;">
-                <div class="flow-diagram">
-                  <svg width="100%" height="250" viewBox="0 0 1000 250" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <marker id="arrow4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                        <polygon points="0 0, 10 3, 0 6" fill="#38b8b3" />
-                      </marker>
-                    </defs>
-                    
-                    <!-- Step 1: Detect -->
-                    <rect x="20" y="80" width="160" height="90" rx="10" fill="#e6f7f6" stroke="#38b8b3" stroke-width="3"/>
-                    <text x="100" y="110" text-anchor="middle" font-weight="bold" fill="#2d9691" font-size="18">1. DETECT</text>
-                    <text x="100" y="135" text-anchor="middle" fill="#6c757d" font-size="13">Identify incident</text>
-                    <text x="100" y="155" text-anchor="middle" fill="#6c757d" font-size="13">Assess severity</text>
-                    
-                    <!-- Arrow -->
-                    <path d="M 180 125 L 220 125" stroke="#38b8b3" stroke-width="3" marker-end="url(#arrow4)"/>
-                    
-                    <!-- Step 2: Contain -->
-                    <rect x="220" y="80" width="160" height="90" rx="10" fill="#e6f7f6" stroke="#38b8b3" stroke-width="3"/>
-                    <text x="300" y="110" text-anchor="middle" font-weight="bold" fill="#2d9691" font-size="18">2. CONTAIN</text>
-                    <text x="300" y="135" text-anchor="middle" fill="#6c757d" font-size="13">Isolate systems</text>
-                    <text x="300" y="155" text-anchor="middle" fill="#6c757d" font-size="13">Stop spread</text>
-                    
-                    <path d="M 380 125 L 420 125" stroke="#38b8b3" stroke-width="3" marker-end="url(#arrow4)"/>
-                    
-                    <!-- Step 3: Investigate -->
-                    <rect x="420" y="80" width="160" height="90" rx="10" fill="#e6f7f6" stroke="#38b8b3" stroke-width="3"/>
-                    <text x="500" y="110" text-anchor="middle" font-weight="bold" fill="#2d9691" font-size="18">3. INVESTIGATE</text>
-                    <text x="500" y="135" text-anchor="middle" fill="#6c757d" font-size="13">Determine scope</text>
-                    <text x="500" y="155" text-anchor="middle" fill="#6c757d" font-size="13">Collect evidence</text>
-                    
-                    <path d="M 580 125 L 620 125" stroke="#38b8b3" stroke-width="3" marker-end="url(#arrow4)"/>
-                    
-                    <!-- Step 4: Notify -->
-                    <rect x="620" y="80" width="160" height="90" rx="10" fill="#ffc107" stroke="#212529" stroke-width="3"/>
-                    <text x="700" y="110" text-anchor="middle" font-weight="bold" fill="#212529" font-size="18">4. NOTIFY</text>
-                    <text x="700" y="135" text-anchor="middle" fill="#212529" font-size="13">Individuals (60d)</text>
-                    <text x="700" y="155" text-anchor="middle" fill="#212529" font-size="13">HHS, media</text>
-                    
-                    <path d="M 780 125 L 820 125" stroke="#38b8b3" stroke-width="3" marker-end="url(#arrow4)"/>
-                    
-                    <!-- Step 5: Remediate -->
-                    <rect x="820" y="80" width="160" height="90" rx="10" fill="#e6f7f6" stroke="#38b8b3" stroke-width="3"/>
-                    <text x="900" y="110" text-anchor="middle" font-weight="bold" fill="#2d9691" font-size="18">5. REMEDIATE</text>
-                    <text x="900" y="135" text-anchor="middle" fill="#6c757d" font-size="13">Fix vulnerability</text>
-                    <text x="900" y="155" text-anchor="middle" fill="#6c757d" font-size="13">Prevent recurrence</text>
-                  </svg>
+              <div style="background: #f8f9fa; padding: 24px; border-radius: 12px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h3 style="margin: 0 0 20px 0; color: var(--brand-primary); font-size: 22px;">The 6 Phases of Incident Response</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                  <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #007bff;">
+                    <div style="font-size: 24px; font-weight: 700; color: #007bff; margin-bottom: 4px;">1. Identify</div>
+                    <p style="margin: 0; color: #6c757d; font-size: 14px;">Something suspicious is detected</p>
+                  </div>
+                  <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #dc3545;">
+                    <div style="font-size: 24px; font-weight: 700; color: #dc3545; margin-bottom: 4px;">2. Contain</div>
+                    <p style="margin: 0; color: #6c757d; font-size: 14px;">Stop the bleeding</p>
+                  </div>
+                  <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #fd7e14;">
+                    <div style="font-size: 24px; font-weight: 700; color: #fd7e14; margin-bottom: 4px;">3. Investigate</div>
+                    <p style="margin: 0; color: #6c757d; font-size: 14px;">What, when, and how</p>
+                  </div>
+                  <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #28a745;">
+                    <div style="font-size: 24px; font-weight: 700; color: #28a745; margin-bottom: 4px;">4. Fix</div>
+                    <p style="margin: 0; color: #6c757d; font-size: 14px;">Patch the vulnerability</p>
+                  </div>
+                  <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #ffc107;">
+                    <div style="font-size: 24px; font-weight: 700; color: #ffc107; margin-bottom: 4px;">5. Notify</div>
+                    <p style="margin: 0; color: #6c757d; font-size: 14px;">Users + regulators (within 60 days)</p>
+                  </div>
+                  <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #6f42c1;">
+                    <div style="font-size: 24px; font-weight: 700; color: #6f42c1; margin-bottom: 4px;">6. Improve</div>
+                    <p style="margin: 0; color: #6c757d; font-size: 14px;">Retrospective</p>
+                  </div>
                 </div>
               </div>
 
-              <div class="key-points" style="margin-top: 24px;">
-                <h3>Breach Notification Timeline</h3>
-                <ul>
-                  <li><strong>Discovery:</strong> Incident identified through monitoring or report</li>
-                  <li><strong>Day 1-10:</strong> Contain breach, assess scope, preserve evidence</li>
-                  <li><strong>Day 11-30:</strong> Complete investigation, determine affected individuals</li>
-                  <li><strong>Day 31-60:</strong> Notify affected individuals (60-day deadline)</li>
-                  <li><strong>Concurrent:</strong> Report to HHS (within 60 days)</li>
-                  <li><strong>If 500+:</strong> Notify media and HHS immediately</li>
-                </ul>
-              </div>
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 32px 0;">
+                <!-- Developers -->
+                <div style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #5B7FDB;">
+                  <h3 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #5B7FDB;">👨‍💻 Developers</h3>
+                  
+                  <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #212529;">What they do:</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #212529;">
+                      <li>Fix the vulnerable code immediately</li>
+                      <li>Help identify what was exposed</li>
+                      <li>Provide logs/data for forensic team</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="background: #fff3cd; padding: 16px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #856404; font-weight: 500;">
+                      <strong style="font-size: 16px;">Example:</strong> Dev notices in logs: "Returned entire patient list due to missing filter" → Reports it immediately → Helps patch API → Helps write post-mortem.
+                    </p>
+                  </div>
+                </div>
 
-              <div class="story-box" style="margin-top: 24px;">
-                <h3>Notification Requirements</h3>
-                <p>Breaches affecting <strong>500 or more</strong> individuals require notification to prominent media outlets and are posted on HHS's "Wall of Shame" public website.</p>
-                <p>Smaller breaches must still be reported to HHS within 60 days of discovery.</p>
+                <!-- QA -->
+                <div style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #E85D75;">
+                  <h3 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #E85D75;">🧪 QA Engineers</h3>
+                  
+                  <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #212529;">What they do:</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #212529;">
+                      <li>Reproduce the incident</li>
+                      <li>Validate the fix doesn't break other modules</li>
+                      <li>Add regression test cases</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="background: #fff3cd; padding: 16px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #856404; font-weight: 500;">
+                      <strong style="font-size: 16px;">Example:</strong> QA verifies that after the breach patch, no unauthorized user can view patient labs.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- DevOps -->
+                <div style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #00A9E0;">
+                  <h3 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #00A9E0;">🏗️ DevOps Engineers</h3>
+                  
+                  <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #212529;">What they do:</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #212529;">
+                      <li>Stop the exploitation</li>
+                      <li>Rotate credentials / API keys</li>
+                      <li>Restore from clean backups if needed</li>
+                      <li>Provide access logs for forensic investigation</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="background: #fff3cd; padding: 16px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #856404; font-weight: 500;">
+                      <strong style="font-size: 16px;">Example:</strong> S3 bucket accidentally made public → DevOps makes it private → rotates keys → checks logs → alerts the team.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- IT Admin -->
+                <div style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #F5A623;">
+                  <h3 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #F5A623;">🖥️ IT Admins</h3>
+                  
+                  <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #212529;">What they do:</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #212529;">
+                      <li>Disable compromised accounts</li>
+                      <li>Investigate workstation malware</li>
+                      <li>Ensure laptops with PHI access are secure</li>
+                      <li>Work with HR & security team</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="background: #fff3cd; padding: 16px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #856404; font-weight: 500;">
+                      <strong style="font-size: 16px;">Example:</strong> Employee laptop stolen → IT Admin uses MDM → Remote wipe → Revoke access → Log incident.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Designers -->
+                <div style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #50C878;">
+                  <h3 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #50C878;">🎨 Designers</h3>
+                  
+                  <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #212529;">What they do:</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #212529;">
+                      <li>Validate UI does not leak PHI in screenshots, notifications, or error messages</li>
+                      <li>Fix UX flows that may lead to accidental exposure</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="background: #fff3cd; padding: 16px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #856404; font-weight: 500;">
+                      <strong style="font-size: 16px;">Example:</strong> An error popup mistakenly exposes a patient name → Designer updates components to mask PHI in errors.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- PMs -->
+                <div style="background: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #9B59B6;">
+                  <h3 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #9B59B6;">🧑‍💼 Project Managers</h3>
+                  
+                  <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #212529;">What they do:</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #212529;">
+                      <li>Coordinate the incident response</li>
+                      <li>Communicate with leadership</li>
+                      <li>Track all remediation steps</li>
+                      <li>Ensure documentation for HIPAA audit</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="background: #fff3cd; padding: 16px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #856404; font-weight: 500;">
+                      <strong style="font-size: 16px;">Example:</strong> PM builds timeline: Detection → Containment → Fix → Communication → Retrospective and stores it in the compliance folder.
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div class="quiz-section" style="margin-top: 32px; display: none;">
@@ -1672,8 +1813,8 @@ console.log(patientId); // 'pat_002'</code></pre>
     </div>
   </div>
 
-  <!-- Full Screen Image Modal -->
-  <div id="securityImageModal" style="
+  <!-- Full Screen Image Gallery Modal -->
+  <div id="securityGalleryModal" style="
     display: none;
     position: fixed;
     top: 0;
@@ -1682,9 +1823,9 @@ console.log(patientId); // 'pat_002'</code></pre>
     height: 100%;
     background: rgba(0, 0, 0, 0.95);
     z-index: 10000;
-    cursor: pointer;
     animation: fadeIn 0.3s ease;
   ">
+    <!-- Close Button -->
     <div style="
       position: absolute;
       top: 20px;
@@ -1695,24 +1836,154 @@ console.log(patientId); // 'pat_002'</code></pre>
       cursor: pointer;
       z-index: 10001;
       transition: color 0.3s ease;
-    " onclick="closeSecuritySample()" onmouseover="this.style.color='#ff4444'" onmouseout="this.style.color='white'">
+    " onclick="closeSecurityGallery()" onmouseover="this.style.color='#ff4444'" onmouseout="this.style.color='white'">
       &times;
     </div>
+
+    <!-- Image Counter -->
+    <div id="imageCounter" style="
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      z-index: 10001;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 8px 20px;
+      border-radius: 20px;
+    ">
+      1 / 5
+    </div>
+
+    <!-- Zoom Controls -->
     <div style="
+      position: absolute;
+      top: 30px;
+      right: 80px;
+      display: flex;
+      gap: 8px;
+      z-index: 10001;
+    ">
+      <button onclick="zoomOut()" title="Zoom Out" style="
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid white;
+        color: white;
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+        −
+      </button>
+      <button onclick="resetZoom()" title="Reset Zoom" style="
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid white;
+        color: white;
+        font-size: 12px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+      " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+        <span id="zoomLevel">100%</span>
+      </button>
+      <button onclick="zoomIn()" title="Zoom In" style="
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid white;
+        color: white;
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+        +
+      </button>
+    </div>
+
+    <!-- Image Container -->
+    <div id="imageContainer" style="
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100%;
-      padding: 40px;
+      padding: 80px 120px;
+      position: relative;
+      overflow: auto;
+      cursor: grab;
     ">
-      <img src="security-example.png" alt="Security Sample Report" style="
-        max-width: 95%;
-        max-height: 95%;
+      <img id="galleryImage" src="" alt="Security Report" style="
+        max-width: 100%;
+        max-height: 100%;
         object-fit: contain;
         border-radius: 8px;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease;
+        transform-origin: center center;
       ">
     </div>
+
+    <!-- Previous Button -->
+    <button id="prevBtn" onclick="previousImage()" style="
+      position: absolute;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid white;
+      color: white;
+      font-size: 24px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+      ‹
+    </button>
+
+    <!-- Next Button -->
+    <button id="nextBtn" onclick="nextImage()" style="
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid white;
+      color: white;
+      font-size: 24px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+      ›
+    </button>
   </div>
 
   <style>
@@ -1721,8 +1992,8 @@ console.log(patientId); // 'pat_002'</code></pre>
       to { opacity: 1; }
     }
     
-    #securityImageModal img {
-      transition: transform 0.3s ease;
+    #galleryImage {
+      transition: opacity 0.3s ease;
     }
     
     button:hover {
@@ -1733,38 +2004,145 @@ console.log(patientId); // 'pat_002'</code></pre>
     button:active {
       transform: translateY(0);
     }
+
+    #prevBtn:hover, #nextBtn:hover {
+      transform: translateY(-50%) scale(1.1) !important;
+    }
   </style>
 
   <script>
-    function openSecuritySample() {
-      const modal = document.getElementById('securityImageModal');
+    // Gallery images from the images folder
+    const galleryImages = [
+      'images/sonar-dashboard.png',
+      'images/trivy dashboard.png',
+      'images/prowler-dashboard.png',
+      'images/zap-dashboard.png',
+      'images/EQi-dashboard-dev.png'
+    ];
+
+    let currentImageIndex = 0;
+    let currentZoom = 1;
+    const zoomStep = 0.25;
+    const minZoom = 0.5;
+    const maxZoom = 3;
+
+    function openSecurityGallery() {
+      const modal = document.getElementById('securityGalleryModal');
+      currentImageIndex = 0;
+      currentZoom = 1;
+      updateGalleryImage();
       modal.style.display = 'block';
       document.body.style.overflow = 'hidden';
     }
 
-    function closeSecuritySample() {
-      const modal = document.getElementById('securityImageModal');
+    function closeSecurityGallery() {
+      const modal = document.getElementById('securityGalleryModal');
       modal.style.display = 'none';
       document.body.style.overflow = 'auto';
+      resetZoom();
     }
 
-    // Close modal when clicking outside the image
-    document.addEventListener('DOMContentLoaded', function() {
-      const modal = document.getElementById('securityImageModal');
-      if (modal) {
-        modal.addEventListener('click', function(e) {
-          if (e.target === modal) {
-            closeSecuritySample();
-          }
-        });
-      }
+    function updateGalleryImage() {
+      const img = document.getElementById('galleryImage');
+      const counter = document.getElementById('imageCounter');
+      
+      // Reset zoom when changing images
+      currentZoom = 1;
+      updateZoomDisplay();
+      
+      // Fade out
+      img.style.opacity = '0';
+      
+      setTimeout(() => {
+        img.src = galleryImages[currentImageIndex];
+        counter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+        
+        // Fade in
+        img.style.opacity = '1';
+      }, 150);
+    }
 
-      // Close modal with Escape key
-      document.addEventListener('keydown', function(e) {
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+      updateGalleryImage();
+    }
+
+    function previousImage() {
+      currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+      updateGalleryImage();
+    }
+
+    function zoomIn() {
+      if (currentZoom < maxZoom) {
+        currentZoom = Math.min(currentZoom + zoomStep, maxZoom);
+        updateZoomDisplay();
+      }
+    }
+
+    function zoomOut() {
+      if (currentZoom > minZoom) {
+        currentZoom = Math.max(currentZoom - zoomStep, minZoom);
+        updateZoomDisplay();
+      }
+    }
+
+    function resetZoom() {
+      currentZoom = 1;
+      updateZoomDisplay();
+    }
+
+    function updateZoomDisplay() {
+      const img = document.getElementById('galleryImage');
+      const zoomLevel = document.getElementById('zoomLevel');
+      const container = document.getElementById('imageContainer');
+      
+      img.style.transform = `scale(${currentZoom})`;
+      zoomLevel.textContent = `${Math.round(currentZoom * 100)}%`;
+      
+      // Update cursor based on zoom
+      if (currentZoom > 1) {
+        container.style.cursor = 'move';
+      } else {
+        container.style.cursor = 'grab';
+      }
+    }
+
+    // Mouse wheel zoom
+    document.addEventListener('DOMContentLoaded', function() {
+      const container = document.getElementById('imageContainer');
+      if (container) {
+        container.addEventListener('wheel', function(e) {
+          const modal = document.getElementById('securityGalleryModal');
+          if (modal.style.display === 'block') {
+            e.preventDefault();
+            if (e.deltaY < 0) {
+              zoomIn();
+            } else {
+              zoomOut();
+            }
+          }
+        }, { passive: false });
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      const modal = document.getElementById('securityGalleryModal');
+      if (modal.style.display === 'block') {
         if (e.key === 'Escape') {
-          closeSecuritySample();
+          closeSecurityGallery();
+        } else if (e.key === 'ArrowRight') {
+          nextImage();
+        } else if (e.key === 'ArrowLeft') {
+          previousImage();
+        } else if (e.key === '+' || e.key === '=') {
+          zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+          zoomOut();
+        } else if (e.key === '0') {
+          resetZoom();
         }
-      });
+      }
     });
   </script>
 
